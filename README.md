@@ -28,7 +28,7 @@
 > If you have experience with using Node.js and Git, skip to step 3.
 
 1. Install Node.js from [here](https://nodejs.org/en/download) and setup it.
-2. Install [Git](https://git-scm.com/downloads) and setup it, or just [download this code as ZIP](https://github.com), extract it, and skip to step 5.
+2. Install [Git](https://git-scm.com/downloads) and setup it, or just [download this code as ZIP](https://github.com/Kulin-Soni/Graphycal/archive/refs/heads/main.zip), extract it, and skip to step 5.
 
 
 3. Open Command Prompt in some folder wherever you want the code to be downloaded, and type:
@@ -53,4 +53,4 @@ AAAAND, there you go!! 🎉
 
 
 ## License
-This project is open source and available under the [MIT License](https://github.com/user/Graphycal/blob/main/LICENSE).
+This project is open source and available under the [MIT License](https://github.com/Kulin-Soni/Graphycal/blob/main/LICENSE).
