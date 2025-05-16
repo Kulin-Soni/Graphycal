@@ -33,7 +33,7 @@
 
 3. Open Command Prompt in some folder wherever you want the code to be downloaded, and type:
     ```
-    git clone repo-link.git
+    git clone https://github.com/Kulin-Soni/Graphycal.git
     ```
 
 4. Go to folder or just type in the command prompt:
