@@ -17,12 +17,16 @@ const Controls = () => {
       limitOption: "auto",
       startLimit: 0,
       maxPts: 100,
-      margin: 1
+      margin: 0,
+      gap: 1
     },
   });
-  const functionHint = useCallback(() => {}, []);
+  const functionHint = useCallback(() => {
+    // alert("This feature is in development.")
+  }, []);
   const submitForm = useCallback((data) => {
-    const dataPoints = genGraphPoints(data.graphEqn, data.limitOption=="manual"?parseFloat(data.startLimit):0, data.limitOption=="manual"?parseInt(data.maxPts):100, data.limitOption=="manual"?parseInt(data.margin):1);
+    const dataPoints = data.limitOption == "manual" ? genGraphPoints(data.graphEqn, data.startLimit, data.maxPts, data.margin, data.gap) : genGraphPoints(data.graphEqn, 0, 100, 0, 1);
+    console.log(dataPoints);
     if (dataPoints!=-1){
       setGraph(dataPoints);
       return;
@@ -82,7 +86,7 @@ const Controls = () => {
             ) : (
               <div className="manualControlsGrid">
                 <div className="inputContainer">
-                  <h6 className="numericInputLabels">Start (X) points from:</h6>
+                  <h6 className="numericInputLabels">Start (X) Points From:</h6>
                   <input
                     type="number"
                     id="startLimit"
@@ -91,11 +95,11 @@ const Controls = () => {
                   />
                 </div>
                 <div className="inputContainer">
-                  <h6 className="numericInputLabels">Maximum points: </h6>
+                  <h6 className="numericInputLabels">Maximum Points: </h6>
                   <input
                     type="number"
                     id="maxIterations"
-                    max="100"
+                    max="1000"
                     className="numericInputs"
                     {...graphConst("maxPts")}
                   />
@@ -111,7 +115,19 @@ const Controls = () => {
                     {...graphConst("margin")}
                   />
                 </div>
+                <div className="inputContainer">
+                  <h6 className="numericInputLabels">Gap Between Points: </h6>
+                  <input
+                    type="number"
+                    id="gap"
+                    min="0"
+                    max="10"
+                    className="numericInputs"
+                    {...graphConst("gap")}
+                  />
+                </div>
               </div>
+
             )}
           </div>
         </div>

@@ -9,8 +9,8 @@ const Graph = () => {
   const config = {
     responsive: true,
     displayModeBar: false,
-    scrollZoom: false,
-    staticPlot: true,
+    scrollZoom: true,
+    staticPlot: false,
   }
 
   return (

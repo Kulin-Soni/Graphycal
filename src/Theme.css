@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 /* Don't change variable names as they are used in ./utils/changeTheme.js */
 :root {
-    --bg:#e2e2e2;
+    --bg:#fcfefb;
      --secondary:  #535e6a;
-    --tertiary:#9ba9b6;
-    --text: hsl(0, 0%, 3%);
-    --theme: rgb(0, 229, 255);
-    --hover: hsl(178, 100%, 50%);
+    --tertiary:#d6dbd8;
+    --quaternary: #a8abaa;
+    --text: #242424;
+    --theme: #20ffaa;
+    --secondary-theme: #00ffff;
+    --hover: var(--theme);
     --ff1: "Sansation";
 }
 * {
@@ -14,12 +16,13 @@
     transition: color .5s linear, background .5s linear, fill .5s linear, box-shadow .5s linear;
 }
 [data-theme="dark"] {
-    --bg: hsl(235, 18%, 13%);
-    --secondary: hsl(235, 18%, 10%);
-    --tertiary: hsl(178, 18%, 4%);
-    --text: hsl(0, 0%, 90%);
-    --hover: hsl(256, 100%, 29%);
-    --theme: rgb(80, 0, 172);
+    --bg:rgb(29,28,28);
+     --secondary:  rgb(40, 42, 49);
+    --tertiary: rgb(41,44,53);
+    --quaternary: var(--bg);
+    --text: #fffdfd;
+    --theme: #15a26c;
+    --hover: #00cd7e;
 }
 
 path {
