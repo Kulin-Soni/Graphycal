@@ -5,12 +5,18 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Graphycal</title>
+    <meta
+      name="description"
+      content="Graphycal is a simple equation-based line graph visualization tool with simple UI."
+    />
   </head>
   <body>
     <div id="root"></div>
     <script>
-      (function (){const theme = localStorage.getItem("theme");
-      document.documentElement.setAttribute("data-theme", theme);})();
+      (function () {
+        const theme = localStorage.getItem("theme");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
     </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
