@@ -4,25 +4,31 @@
     --bg:#fcfefb;
      --secondary:  #535e6a;
     --tertiary:#d6dbd8;
-    --quaternary: #a8abaa;
     --text: #242424;
     --theme: #20ffaa;
     --secondary-theme: #00ffff;
     --hover: var(--theme);
     --ff1: "Sansation";
+
+
+
+    /* Note:- The following styles are component specific. */
+    --secondary-hsl-numbers: 211 12% 37%; /* Same as the --secondary but hsl numbers. (Hue, Saturation, Light) */
 }
 * {
     margin: 0;
-    transition: color .5s linear, background .5s linear, fill .5s linear, box-shadow .5s linear;
+    transition: color .5s linear, background .5s linear, fill .5s linear, box-shadow .5s linear, border .5s linear;
 }
 [data-theme="dark"] {
     --bg:rgb(29,28,28);
      --secondary:  rgb(40, 42, 49);
     --tertiary: rgb(41,44,53);
-    --quaternary: var(--bg);
     --text: #fffdfd;
     --theme: #15a26c;
     --hover: #00cd7e;
+
+
+    --secondary-hsl-numbers: 227 10% 17%; /* Same as the --secondary but hsl numbers. (Hue, Saturation, Light) */
 }
 
 path {

@@ -1,146 +1,159 @@
-import React, { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import "../Theme.css";
 import "./css/Controls.css";
 import Hint from "../icons/Hint";
 import Generate from "../icons/Generate";
-import genGraphPoints from "../utils/generateGraphPoints.js"
-import { useGlobalContext } from "../contexts/globalContextProvider";
+import Automatic from "../icons/Automatic.jsx";
+import genGraphPoints from "../utils/generateGraphPoints.js";
+import { useGlobalContext } from "../contexts/globalContextProvider.jsx";
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from "motion/react";
+import Manual from "../icons/Manual.jsx";
 const Controls = () => {
+  const [mode, setMode] = useState("auto");
   const { setGraph } = useGlobalContext();
-  const {
-    register: graphConst,
-    handleSubmit: submitConst,
-    watch,
-  } = useForm({
+  const { register: graphConst, handleSubmit: submitConst } = useForm({
     defaultValues: {
-      limitOption: "auto",
       startLimit: 0,
       maxPts: 100,
       margin: 0,
-      gap: 1
+      gap: 1,
     },
   });
-  const functionHint = useCallback(() => {
-    // alert("This feature is in development.")
+  const modeSet = useCallback(() => {
+    setMode((prev) => (prev == "auto" ? "manual" : "auto"));
   }, []);
-  const submitForm = useCallback((data) => {
-    const dataPoints = data.limitOption == "manual" ? genGraphPoints(data.graphEqn, data.startLimit, data.maxPts, data.margin, data.gap) : genGraphPoints(data.graphEqn, 0, 100, 0, 1);
-    console.log(dataPoints);
-    if (dataPoints!=-1){
-      setGraph(dataPoints);
-      return;
-    } else {
-      alert("Equation couldn't be solved.")
-      return;
-    }
-  }, [setGraph]);
-
-  const selectedLimitOption = watch("limitOption");
+  // const functionHint = useCallback(() => {
+  //   alert("This feature is in development.")
+  // }, []);
+  const submitForm = useCallback(
+    (data) => {
+      const dataPoints =
+        data.limitOption == "manual"
+          ? genGraphPoints(
+              data.graphEqn,
+              data.startLimit,
+              data.maxPts,
+              data.margin,
+              data.gap
+            )
+          : genGraphPoints(data.graphEqn, 0, 100, 0, 1);
+      console.log(dataPoints);
+      if (dataPoints != -1) {
+        setGraph(dataPoints);
+        return;
+      } else {
+        alert("Equation couldn't be solved.");
+        return;
+      }
+    },
+    [setGraph]
+  );
   return (
-    <form onSubmit={submitConst(submitForm)} id="form">
-      <div className="controlPanel">
-        <div className="fncInputArea">
-          <h2>f(x) =</h2>
-          <input
-            type="text"
-            id="fncInput"
-            {...graphConst("graphEqn", { required: true })}
-          />
-          <button
-            onClick={() => {
-              functionHint();
-            }}
-          >
-            <Hint />
-          </button>
-        </div>
-        <div className="controls">
-          <div className="limitOptionsContainer">
-            <input
-              type="radio"
-              value="auto"
-              id="auto"
-              className="hide"
-              {...graphConst("limitOption")}
-            />
-            <label htmlFor="auto" className="lbllimitOption">
-              Auto
-            </label>
-            <input
-              type="radio"
-              value="manual"
-              id="manual"
-              className="hide"
-              {...graphConst("limitOption")}
-            />
-            <label htmlFor="manual" className="lbllimitOption">
-              Manual
-            </label>
-          </div>
-          <div className="manualControlsContainer">
-            {selectedLimitOption == "auto" ? (
-              <p className="autoControlledMsg">
-                Controls are automatically set for your best experience.
-              </p>
-            ) : (
-              <div className="manualControlsGrid">
-                <div className="inputContainer">
-                  <h6 className="numericInputLabels">Start (X) Points From:</h6>
-                  <input
-                    type="number"
-                    id="startLimit"
-                    className="numericInputs"
-                    {...graphConst("startLimit")}
-                  />
-                </div>
-                <div className="inputContainer">
-                  <h6 className="numericInputLabels">Maximum Points: </h6>
-                  <input
-                    type="number"
-                    id="maxIterations"
-                    max="1000"
-                    className="numericInputs"
-                    {...graphConst("maxPts")}
-                  />
-                </div>
-                <div className="inputContainer">
-                  <h6 className="numericInputLabels">Margin: </h6>
-                  <input
-                    type="number"
-                    id="margin"
-                    min="0"
-                    max="10"
-                    className="numericInputs"
-                    {...graphConst("margin")}
-                  />
-                </div>
-                <div className="inputContainer">
-                  <h6 className="numericInputLabels">Gap Between Points: </h6>
-                  <input
-                    type="number"
-                    id="gap"
-                    min="0"
-                    max="10"
-                    className="numericInputs"
-                    {...graphConst("gap")}
-                  />
-                </div>
+    <div className="controls">
+      <form onSubmit={submitConst(submitForm)} id="form">
+        <AnimatePresence>
+          <div className="gridContainer">
+            <motion.div
+              initial={{ opacity: 0, x: 200 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, type: "spring", damping: 15 }}
+              className="chunks dcenter expression-container"
+            >
+              <h5 className="text fx-label">f(x) =</h5>
+              <input
+                type="text"
+                {...graphConst("graphEqn", { required: true })}
+                className="expression-input"
+                placeholder="expression (eg: x^2+2)"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 200 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{
+                duration: 0.4,
+                delay: 0.125,
+                type: "spring",
+                damping: 15,
+              }}
+              className="chunks"
+            >
+              <div className="dcenter controls-container">
+                <button
+                  className="switch_Control"
+                  onClick={() => {
+                    modeSet();
+                  }}
+                >
+                  <AnimatePresence mode="popLayout" initial={false}>
+                    <motion.div
+                      key={mode}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                      className="label"
+                    >
+                      {mode == "auto" ? (
+                        <div>
+                          <div className="IconContainer">
+                            <Automatic />
+                          </div>
+                          <div>
+                            <h4 className="modeLabel">Auto</h4>
+                          </div>
+                        </div>
+                      ) : (
+                        <div>
+                          <div className="IconContainer">
+                            <Manual />
+                          </div>
+                          <div>
+                            <h4 className="modeLabel">Manual</h4>
+                          </div>
+                        </div>
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
+                </button>
               </div>
-
-            )}
+              <div className="modeOptions">
+                <AnimatePresence mode="popLayout" initial={false}>
+                  <motion.div
+                    className="modeOptionsContainer dcenter"
+                    key={mode}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -50 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {mode == "auto" ? (
+                      <h3>
+                        Controls are automatically set for your best experiece.
+                      </h3>
+                    ) : (
+                      <div className="manualModeContainer dcenter">
+                        <h3>Manual controls coming soon.</h3>
+                      </div>
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+              <div className="submitBtnContainer dcenter">
+                    <button type="submit" className="submitBtn">
+                      <div className="IconContainer">
+                      <Generate />
+                      </div>
+                      <h3 className="submitBtnLabel">Generate</h3>
+                    </button>
+              </div>
+            </motion.div>
           </div>
-        </div>
-        <div className="buttonHolder">
-          <button className="generateButton" type="submit">
-            <div>
-              <Generate />
-            </div>
-            <h5>Generate</h5>
-          </button>
-        </div>
-      </div>
-    </form>
+        </AnimatePresence>
+      </form>
+    </div>
   );
 };
 
