@@ -52,7 +52,10 @@ const Controls = () => {
   );
   return (
     <div className="controls">
-      <form onSubmit={submitConst(submitForm)} id="form">
+      <form
+        onSubmit={submitConst(submitForm)}
+        id="form"
+      >
         <AnimatePresence>
           <div className="gridContainer">
             <motion.div
@@ -83,7 +86,8 @@ const Controls = () => {
               <div className="dcenter controls-container">
                 <button
                   className="switch_Control"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
                     modeSet();
                   }}
                 >
@@ -142,12 +146,12 @@ const Controls = () => {
                 </AnimatePresence>
               </div>
               <div className="submitBtnContainer dcenter">
-                    <button type="submit" className="submitBtn">
-                      <div className="IconContainer">
-                      <Generate />
-                      </div>
-                      <h3 className="submitBtnLabel">Generate</h3>
-                    </button>
+                <button type="submit" className="submitBtn">
+                  <div className="IconContainer">
+                    <Generate />
+                  </div>
+                  <h3 className="submitBtnLabel">Generate</h3>
+                </button>
               </div>
             </motion.div>
           </div>
