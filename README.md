@@ -1,3 +1,5 @@
+# ⚠️ THE PROJECT IS NOT READY YET. WE DO NOT ENCOURAGE YOU TO RUN IT LOCALLY.
+
 # Graphycal
 📈 A simple line-graph visualization software made to be as simple as possible for use.
 
@@ -19,8 +21,6 @@
 
 ## Tools Used
 - [Vite + React](https://vite.dev/)
-- [Plotly](https://plotly.com/graphing-libraries/)
-- [Mathjs](https://mathjs.org/)
 
 
 ## Run Locally
